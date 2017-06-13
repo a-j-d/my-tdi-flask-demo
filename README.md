@@ -1,4 +1,5 @@
-# I am now editing this file
+I am now editing this file. Everythong below is from the original flask-demo repository linked here: 
+  https://github.com/thedataincubator/flask-demo
 
 # Flask on Heroku
 
