@@ -1,15 +1,56 @@
-<!doctype html>
+<!-- #######  doctype html! #########-->
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Hello, World!</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	</head>
-	<body>
-		<div>
-  			<h1>Hello, World!</h1>
-		</div>
-	</body>
+    
+    <head>
+        
+        <meta charset="utf-8">
+        <title>Stock Ticker App</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!--<link rel=stylesheet type=text/css href='/static/style.css'>-->
+        
+    </head>
+    
+    
+    <body>
+        
+        <div class="page">
+            <h1 style="text-align:center",>Stock Ticker App</h1> 
+            <br>
+            
+            <div class="metanav">
+                
+                <p style="text-align:center",>
+                    This app plots data of your choice of stock ticker over the past month.
+                </p>
+                
+                <br>
+                
+                <h4 style="text-align:center",>
+                    Please enter a stock ticker eg. GOOG, and check desired features.
+                </h4>
+                
+                <form id="input" method="post" action="index">  
+                    
+                    <p style="text-align:center",>
+                        Ticker symbol: <input type="text" name="ticker">
+                    </p>
+                    
+                    <p style="text-align:left; padding-left: 385px",>
+                        <input type="checkbox" name="features" value="Close">Closing price<br>
+                        <input type="checkbox" name="features" value="Adj. Close">Adjusted closing price<br>
+                        <input type="checkbox" name="features" value="Open">Opening price<br>
+                        <input type="checkbox" name="features" value="Adj. Open">Adjusted opening price<br>
+                        <input type="submit" value="Submit">
+                    </p>
+                    
+                </form>
+            
+            </div>
+        </div>
+        
+    </body>
+
+
 </html>
