@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect
 import requests
 import datetime as dt
 from datetime import timedelta 
+import numpy as np
 
 app = Flask(__name__)
 
@@ -35,7 +36,7 @@ def index_post():
         app.vars['stock_name'] = request.form('ticker')
         #app.vars['stock_name'] = 'dummy_ticker_name'
         app.vars['checkboxes'] = request.form('features')
-        print (app.vars['checkboxes']); sys.stdout.flush();
+        np.savetxt('fname.txt',app.vars['checkboxes'])
     
     return redirect('/plot_data')
 
