@@ -27,8 +27,9 @@ def index_post():
         # collect ticker and checkbox data
         app.vars['stock_name'] = request.form('ticker')
         #app.vars['stock_name'] = 'dummy_ticker_name'
+        print 'features: ', request.form('features')
         app.vars['checkboxes'] = request.form('features')
-        np.savetxt('fname.txt',app.vars['checkboxes'])
+        #np.savetxt('fname.txt',np.array([app.vars['checkboxes']]))
     
     return redirect('/plot_data')
 
