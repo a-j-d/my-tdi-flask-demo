@@ -22,6 +22,7 @@ def index_get():
 def index_post():
     # check below that method is POST (i.e. user input submitted)
     print 'index_post() was accessed';sys.stdout.flush(); 
+    print 'hi: ',request.method;sys.stdout.flush();
     if request.method == 'POST':
         # collect ticker and checkbox data
         app.vars['stock_name'] = request.form('ticker')
