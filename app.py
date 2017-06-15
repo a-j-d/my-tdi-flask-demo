@@ -25,6 +25,7 @@ def index_post():
     print 'hi: ',request.method;sys.stdout.flush();
     if request.method == 'POST':
         # collect ticker and checkbox data
+        print "request.form: " request.form
         app.vars['stock_name'] = request.form['ticker']
         print 'features: ', request.form['features']; sys.stdout.flush();
         #app.vars['checkboxes'] = request.form['features']
