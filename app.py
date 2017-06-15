@@ -38,10 +38,12 @@ def plot_data():
         
         return render_template('plot_page.html',tckname=app.vars['stock_name'])
 
-    else if request.method == 'POST':
+    elif request.method == 'POST':
         #
         print ('request was post');sys.stdout.flush();
         return redirect('/index')
+    else: 
+        print ' nothing to do ';sys.stdout.flush();
 
 
 if __name__ == '__main__':
