@@ -21,6 +21,7 @@ def index_get():
 @app.route('/index',methods=['POST'])
 def index_post():
     # check below that method is POST (i.e. user input submitted)
+    print 'index_post() was accessed';sys.stdout.flush(); 
     if request.method == 'POST':
         # collect ticker and checkbox data
         app.vars['stock_name'] = request.form('ticker')
@@ -34,7 +35,7 @@ def index_post():
 @app.route('/plot_data', methods=['GET','POST'])
 def plot_data():
     if request.method == 'GET':
-        print( 'nothing to do, request was get' ); sys.stdout.flush();
+        print( 'nothing to do, plot_data request was get' ); sys.stdout.flush();
         
         return render_template('plot_page.html',tckname=app.vars['stock_name'])
 
