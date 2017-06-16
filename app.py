@@ -100,7 +100,7 @@ def plot_data():
             script, div = components(fig)
             
             #html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color=color, _from=from_date, to=today)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
-            html = render_template('plot_page.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
+            html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
             return encode_utf8(html)
             #return render_template('plot_page.html')
             
