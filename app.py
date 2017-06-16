@@ -84,6 +84,7 @@ def plot_data():
             print "df2 is: ", df2; sys.stdout.flush();
             
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
+            fig.line([1,2,3,4,],[2,4,8,16])
             """"
             fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
             
