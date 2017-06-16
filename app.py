@@ -1,7 +1,15 @@
 import sys
 import os
 from flask import Flask, render_template, request, redirect
-
+import datetime as dt
+import requests
+import simplejson as json
+import pandas as pd
+import collections
+from bokeh.embed import components
+from bokeh.plotting import figure
+from bokeh.resources import INLINE
+from bokeh.util.string import encode_utf8
 app = Flask(__name__)
 
 app.vars={}
@@ -27,6 +35,7 @@ def index_post():
         # collect ticker and checkbox data
         app.vars['stock_name'] = request.form['ticker']
         print 'features: ', request.form.getlist('features'); sys.stdout.flush();
+        print 'ticker: ', request.form['ticker']
         #app.vars['checkboxes'] = request.form['features']
         
     return redirect('/plot_data')
@@ -35,16 +44,54 @@ def index_post():
 @app.route('/plot_data', methods=['GET','POST'])
 def plot_data():
     if request.method == 'GET':
-        print( 'nothing to do, plot_data request was get' ); sys.stdout.flush();
+        # prepare api request url
+        today = dt.date.today().isoformat()
+        from_date = (today - dt.timedelta(days=31)).isoformat()
         
-        return render_template('plot_page.html',tckname=app.vars['stock_name'])
+        request_args = {'column_index':'4', 'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
 
+        req = requests.get("https://www.quandl.com/api/v3/datasets/WIKI/" + app.vars['stock_name']+".json",data=request_args)
+
+        if req.status_code == requests.code.ok:
+            # ind1 = open, ind4 = close, ind8 = ajd. open, ind11 = adj. close
+            print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
+
+            payload={'column_index':'4','end_date': dt.date.today(), 'frequency': 'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg','start_date': dt.date.today() - dt.timedelta(days=31)}
+
+            df = pd.DataFrame(r.json())
+
+            datdic = dict(r.json()['dataset']['data'])
+
+            ordatdic = collections.OrderedDict(sorted(datdic.items()))
+
+            df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
+
+            fig = figure(width=500, height=300)#, x_axis_type="datetime") 
+            fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
+            
+            fig.title.text="Quandl WIKI data for '"+app.vars['stock_name']+"'"
+            fig.legend.location="top_left"
+            fig.xaxis.axis_label="Date"
+            fig.yaxis.axis_label="Price"
+
+            js_resources = INLINE.render_js()
+            css_resources = INLINE.render_css()
+
+            script, div = components(fig)
+
+            html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color=color, _from=from_date, to=today)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
+            return encode_utf8(html)
+       
+        # display error below otherwise
+        else:
+            return render_template('key_error.html')
+            
     elif request.method == 'POST':
         #
         print ('request was post');sys.stdout.flush();
         return redirect('/index')
     else: 
-        print ' nothing to do ';sys.stdout.flush();
+        print ' /plot_data request was neither GET nor POST ';sys.stdout.flush();
 
 
 if __name__ == '__main__':
