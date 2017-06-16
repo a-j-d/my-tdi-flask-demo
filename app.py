@@ -72,13 +72,17 @@ def plot_data():
             print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
             
             df = pd.DataFrame(r.json())
-
+            print "df: ", df; sys.stdout.flush();
+            
             datdic = dict(r.json()['dataset']['data'])
+            print "datdic: ", datdic; sys.stdout.flush();
             
             ordatdic = collections.OrderedDict(sorted(datdic.items()))
+            print "ordatdic: ", ordatdic ; sys.stdout.flush();
             
             df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
-            print "df2 is: ", df2
+            print "df2 is: ", df2; sys.stdout.flush();
+            
             """
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
             fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
