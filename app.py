@@ -43,15 +43,20 @@ def index_post():
 
 @app.route('/plot_data', methods=['GET','POST'])
 def plot_data():
+    print '/plot data was accessed' ; sys.stdout.flush();
     if request.method == 'GET':
+        print 'plot data method was GET' ; sys.stdout.flush();
         # prepare api request url
         today = dt.date.today().isoformat()
         from_date = (today - dt.timedelta(days=31)).isoformat()
-        
+        print 'dates are: ', today, from_date; sys.stdout.flush();
         request_args = {'column_index':'4', 'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
-
+        
+        print 'request_args is: ', request_args; sys.stdout.flush();
+        
         req = requests.get("https://www.quandl.com/api/v3/datasets/WIKI/" + app.vars['stock_name']+".json",data=request_args)
-
+        
+        
         if req.status_code == requests.code.ok:
             # ind1 = open, ind4 = close, ind8 = ajd. open, ind11 = adj. close
             print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
