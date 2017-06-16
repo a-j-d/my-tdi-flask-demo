@@ -83,7 +83,6 @@ def plot_data():
             df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
             print "df2 is: ", df2; sys.stdout.flush();
             
-            """
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
             fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
             
@@ -99,10 +98,9 @@ def plot_data():
             
             html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color=color, _from=from_date, to=today)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
             return encode_utf8(html)
-            """
-            return render_template('plot_page.html')
+            #return render_template('plot_page.html')
             
-        # display error below otherwise
+            # display error below otherwise
         else:
             return render_template('key_error.html')
             
