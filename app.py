@@ -63,15 +63,12 @@ def plot_data():
         
         req = requests.get("https://www.quandl.com/api/v3/datasets/WIKI/" + app.vars['stock_name']+".json",data=request_args)    
         
-        print 'Was request successful? ', req.status_code == req.status_code
+        print 'Was request successful? ', req.status_code == requests.codes.ok
         
-        if req.status_code == requests.code.ok:
+        if req.status_code == requests.codes.ok:
             # ind1 = open, ind4 = close, ind8 = ajd. open, ind11 = adj. close
             
             print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
-            """
-
-            payload={'column_index':'4','end_date': dt.date.today(), 'frequency': 'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg','start_date': dt.date.today() - dt.timedelta(days=31)}
 
             df = pd.DataFrame(r.json())
 
@@ -80,7 +77,8 @@ def plot_data():
             ordatdic = collections.OrderedDict(sorted(datdic.items()))
 
             df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
-
+            print "df2 is: ", df2
+"""
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
             fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
             
