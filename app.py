@@ -81,7 +81,8 @@ def plot_data():
             print "ordatdic: ", ordatdic ; sys.stdout.flush();
             
             df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
-            print "df2 is: ", df2; sys.stdout.flush();
+            print "df2 data is: ", df2['Close']; sys.stdout.flush();
+            print "df2 index is: ", df2.index
             
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
             fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
