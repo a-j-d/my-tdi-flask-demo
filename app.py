@@ -71,10 +71,10 @@ def plot_data():
             
             print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
             
-            df = pd.DataFrame(r.json())
+            df = pd.DataFrame(req.json())
             print "df: ", df; sys.stdout.flush();
             
-            datdic = dict(r.json()['dataset']['data'])
+            datdic = dict(req.json()['dataset']['data'])
             print "datdic: ", datdic; sys.stdout.flush();
             
             ordatdic = collections.OrderedDict(sorted(datdic.items()))
