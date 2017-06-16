@@ -85,7 +85,8 @@ def plot_data():
             print "df2 index is: ", df2.index
             
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
-            fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
+            #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
+            fig.line(range(len(df2['Close'])),df2['Close'])#,color="#2222aa",line_width=5)
             fig.title.text="Quandl WIKI data for '"+app.vars['stock_name']+"'"
             fig.legend.location="top_left"
             fig.xaxis.axis_label="Date"
