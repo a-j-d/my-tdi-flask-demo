@@ -85,13 +85,13 @@ def plot_data():
             
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
             fig.line([1,2,3,4],[2,4,8,16])
-            """"
-            fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
-            
             fig.title.text="Quandl WIKI data for '"+app.vars['stock_name']+"'"
             fig.legend.location="top_left"
             fig.xaxis.axis_label="Date"
             fig.yaxis.axis_label="Price"
+            """"
+            fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
+            
             """
             
             js_resources = INLINE.render_js()
@@ -100,7 +100,7 @@ def plot_data():
             script, div = components(fig)
             
             #html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color=color, _from=from_date, to=today)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
-            html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color='Black')#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
+            html = render_template('plot_page.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color='Black', tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
             return encode_utf8(html)
             #return render_template('plot_page.html')
             
