@@ -58,7 +58,10 @@ def plot_data():
         from_date = (dt.date.today() - dt.timedelta(days=31)).isoformat()
         print 'dates are: ', today, from_date; sys.stdout.flush();
         
-        request_args = {'column_index':'4', 'exclude_column_names':'true', 'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
+        ###
+        #request_args = {'column_index':'4', 'exclude_column_names':'true', 'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
+        ###
+        request_args = {'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
         
         print 'request_args is: ', request_args; sys.stdout.flush();
         
@@ -71,6 +74,21 @@ def plot_data():
             # ind1 = open, ind4 = close, ind8 = ajd. open, ind11 = adj. close
             
             print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
+            
+            ###
+            dat = pd.DataFrame(req.json()['dataset']['data'])
+            ###
+            indtoplot = []
+            ###
+            dattoplot = []
+            ###
+            for index in dat_col_ind:
+                #    indtoplot.append(list(pd.to_datetime(dat[0]).values))
+                ###
+                indtoplot.append(list(range(len(dat[0].values))))
+                ###
+                dattoplot.append(list(dat[index].values))
+
             
             df = pd.DataFrame(req.json())
             print "df: ", df; sys.stdout.flush();
@@ -86,8 +104,10 @@ def plot_data():
             print "df2 index is: ", df2.index
             
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
+            ###
+            fig.multi_line(indtoplot, dattoplot)
             #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
-            fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
+#            fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
             fig.xaxis.formatter = DatetimeTickFormatter(days=["%d-%m-%y"], months=["%d-%m-%y"], years=["%d-%m-%y"])
             fig.title.text="Quandl WIKI data for '"+app.vars['stock_name']+"'"
             fig.legend.location="top_left"
@@ -118,8 +138,9 @@ def plot_data():
 
 if __name__ == '__main__':
     print 'hi1, i.e. in main if stmt';sys.stdout.flush()
-    # app.run(host='0.0.0.0',port=33507)
+
     port = int(os.environ.get("PORT", 5000))
+    
     print 'hi1, i.e. port assigned';sys.stdout.flush()
+    
     app.run(host='0.0.0.0',port=port, debug=True)
-    #app.run(port=33507)
