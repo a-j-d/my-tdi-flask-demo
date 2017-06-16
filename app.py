@@ -57,7 +57,7 @@ def plot_data():
         from_date = (dt.date.today() - dt.timedelta(days=31)).isoformat()
         print 'dates are: ', today, from_date; sys.stdout.flush();
         
-        request_args = {'column_index':'4', 'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
+        request_args = {'column_index':'4', 'exclude_column_names':'true', 'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
         
         print 'request_args is: ', request_args; sys.stdout.flush();
         
