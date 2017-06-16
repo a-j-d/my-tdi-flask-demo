@@ -10,6 +10,7 @@ from bokeh.embed import components
 from bokeh.plotting import figure
 from bokeh.resources import INLINE
 from bokeh.util.string import encode_utf8
+
 app = Flask(__name__)
 
 app.vars={}
@@ -28,9 +29,11 @@ def index_get():
 
 @app.route('/index',methods=['POST'])
 def index_post():
+    
     # check below that method is POST (i.e. user input submitted)
     print 'index_post() was accessed';sys.stdout.flush(); 
     print 'hi: ',request.method;sys.stdout.flush();
+
     if request.method == 'POST':
         # collect ticker and checkbox data
         app.vars['stock_name'] = request.form['ticker']
@@ -51,7 +54,7 @@ def plot_data():
         
         # prepare api request url
         today = dt.date.today().isoformat()
-        from_date = (today - dt.timedelta(days=31)).isoformat()
+        from_date = (dt.date.today() - dt.timedelta(days=31)).isoformat()
         print 'dates are: ', today, from_date; sys.stdout.flush();
         
         request_args = {'column_index':'4', 'start_date':from_date, 'end_date':today, 'frequency':'daily', 'api_key':'8nDck7hx1ivMZH1LpRKg'}
