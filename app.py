@@ -66,19 +66,20 @@ def plot_data():
         print 'Was request successful? ', req.status_code == requests.codes.ok
         
         if req.status_code == requests.codes.ok:
+            
             # ind1 = open, ind4 = close, ind8 = ajd. open, ind11 = adj. close
             
             print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
-
+            
             df = pd.DataFrame(r.json())
 
             datdic = dict(r.json()['dataset']['data'])
-
+            
             ordatdic = collections.OrderedDict(sorted(datdic.items()))
-
+            
             df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
             print "df2 is: ", df2
-"""
+            """
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
             fig.line(df2.index,df2['ClosingPrice'])#,color="#2222aa",line_width=5)
             
@@ -89,14 +90,14 @@ def plot_data():
 
             js_resources = INLINE.render_js()
             css_resources = INLINE.render_css()
-
+            
             script, div = components(fig)
-
+            
             html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color=color, _from=from_date, to=today)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
             return encode_utf8(html)
-        """
+            """
             return render_template('plot_page.html')
-       
+            
         # display error below otherwise
         else:
             return render_template('key_error.html')
