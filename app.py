@@ -77,9 +77,14 @@ def plot_data():
             
             ###
             df = pd.DataFrame(req.json())
+            ###
+            print "df ", df; sys.stdout.flush(); 
             
             ###
             dat = df['dataset']['data']
+            
+            ###
+            print 'dat' , dat; sys.stdout.flush();
             
             ###
             dat_col_ind = [df['dataset']['column_names'].index(elem) for elem in app.vars['features']]
@@ -106,7 +111,8 @@ def plot_data():
             ###
             print "dattoplot ", dattoplot; sys.stdout.flush();
             
-            df = pd.DataFrame(req.json())
+            ###
+            #df = pd.DataFrame(req.json())
             ###
             #print "df: ", df; sys.stdout.flush();
             
@@ -118,7 +124,8 @@ def plot_data():
             ###
             #print "ordatdic: ", ordatdic ; sys.stdout.flush();
             
-            df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
+            ###
+            #df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
             ###
             #print "df2 data is: ", df2['Close']; sys.stdout.flush();
             ###
