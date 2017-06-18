@@ -40,7 +40,7 @@ def index_post():
         app.vars['stock_name'] = request.form['ticker']
         print 'features: ', request.form.getlist('features'); sys.stdout.flush();
         print 'ticker: ', request.form['ticker']
-        #app.vars['checkboxes'] = request.form['features']
+        app.vars['checkboxes'] = request.form.getlist('features')
         
     return redirect('/plot_data')
 
@@ -85,9 +85,10 @@ def plot_data():
             
             ###
             print 'dat' , dat; sys.stdout.flush();
+            print 'dat_col_names' , df['dataset']['column_names']; sys.stdout.flush();
             
             ###
-            dat_col_ind = [df['dataset']['column_names'].index(elem) for elem in app.vars['features']]
+            dat_col_ind = [df['dataset']['column_names'].index(elem) for elem in app.vars['checkboxes']]
             print 'dat_col_ind ', dat_col_ind ; sys.stdout.flush();
 
             ###
@@ -148,8 +149,8 @@ def plot_data():
             
             script, div = components(fig)
             
-            #html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color=color, _from=from_date, to=today)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
-            html = render_template('plot_page.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['features']))
+            #html = render_template('embed.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources, color=color, _from=from_date, to=today)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['checkboxes']))
+            html = render_template('plot_page.html', plot_script=script, plot_div=div, js_resources=js_resources, css_resources=css_resources)#, tckname=app.vars['stock_name'],pricestring=", ".join(app.vars['checkboxes']))
             return encode_utf8(html)
             #return render_template('plot_page.html')
             
