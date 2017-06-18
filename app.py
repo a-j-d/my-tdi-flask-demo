@@ -88,27 +88,37 @@ def plot_data():
                 indtoplot.append(list(range(len(dat[0].values))))
                 ###
                 dattoplot.append(list(dat[index].values))
-
+            
+            ###
+            print "indtoplot ", indtoplot
+            ###
+            print "dattoplot ", dattoplot
             
             df = pd.DataFrame(req.json())
-            print "df: ", df; sys.stdout.flush();
+            ###
+            #print "df: ", df; sys.stdout.flush();
             
             datdic = dict(req.json()['dataset']['data'])
-            print "datdic: ", datdic; sys.stdout.flush();
+            ###
+            #print "datdic: ", datdic; sys.stdout.flush();
             
             ordatdic = collections.OrderedDict(sorted(datdic.items()))
-            print "ordatdic: ", ordatdic ; sys.stdout.flush();
+            ###
+            #print "ordatdic: ", ordatdic ; sys.stdout.flush();
             
             df2 = pd.DataFrame(data=ordatdic.values(), index=pd.DatetimeIndex(ordatdic.keys()), columns= ['Close'])
-            print "df2 data is: ", df2['Close']; sys.stdout.flush();
-            print "df2 index is: ", df2.index
+            ###
+            #print "df2 data is: ", df2['Close']; sys.stdout.flush();
+            ###
+            #print "df2 index is: ", df2.index
             
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
             ###
             fig.multi_line(indtoplot, dattoplot)
             #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
-#            fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
-            fig.xaxis.formatter = DatetimeTickFormatter(days=["%d-%m-%y"], months=["%d-%m-%y"], years=["%d-%m-%y"])
+            #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
+            ###
+            #fig.xaxis.formatter = DatetimeTickFormatter(days=["%d-%m-%y"], months=["%d-%m-%y"], years=["%d-%m-%y"])
             fig.title.text="Quandl WIKI data for '"+app.vars['stock_name']+"'"
             fig.legend.location="top_left"
             fig.xaxis.axis_label="Date"
