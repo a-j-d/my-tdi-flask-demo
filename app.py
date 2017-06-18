@@ -98,12 +98,22 @@ def plot_data():
             indtoplot = []
             ###
             dattoplot = []
+            
+            ###
+            print "dat[0] ", dat[0]
+            ###
+            print "dat[4] ", dat[4]
+            ###
+            print "dat[1] ", dat[1]
+            ###
+            print "dat[8] ", dat[8]
+            
 
             ###
             for index in dat_col_ind:
                 #    indtoplot.append(list(pd.to_datetime(dat[0]).values))
                 ###
-                indtoplot.append(list(range(len(dat[0].values))))
+                indtoplot.append(list(range(len(dat[1].values))))
                 ###
                 dattoplot.append(list(dat[index].values))
             
