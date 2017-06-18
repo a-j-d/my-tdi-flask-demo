@@ -111,9 +111,9 @@ def plot_data():
 
             ###
             for index in dat_col_ind:
-                #    indtoplot.append(list(pd.to_datetime(dat[0]).values))
+                indtoplot.append(list(pd.to_datetime(dat[0]).values))
                 ###
-                indtoplot.append(list(range(len(dat[1].values))))
+                ##indtoplot.append(list(range(len(dat[1].values))))
                 ###
                 dattoplot.append(list(dat[index].values))
             
@@ -150,7 +150,7 @@ def plot_data():
             #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
             #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
             ###
-            #fig.xaxis.formatter = DatetimeTickFormatter(days=["%d-%m-%y"], months=["%d-%m-%y"], years=["%d-%m-%y"])
+            fig.xaxis.formatter = DatetimeTickFormatter(days=["%d-%m-%y"], months=["%d-%m-%y"], years=["%d-%m-%y"])
             fig.title.text="Quandl WIKI data for '"+app.vars['stock_name']+"'"
             fig.legend.location="top_left"
             fig.xaxis.axis_label="Date"
