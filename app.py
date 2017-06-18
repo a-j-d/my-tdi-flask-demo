@@ -76,11 +76,23 @@ def plot_data():
             print( 'displaying plot..., plot_data request was get' ); sys.stdout.flush();
             
             ###
-            dat = pd.DataFrame(req.json()['dataset']['data'])
+            df = pd.DataFrame(req.json())
+            
+            ###
+            dat = df['dataset']['data']
+            
+            ###
+            dat_col_ind = [df['dataset']['column_names'].index(elem) for elem in app.vars['features']]
+            print 'dat_col_ind ', dat_col_ind ; sys.stdout.flush();
+
+            ###
+            print "dat info", type(dat), dat; sys.stdout.flush();
+            
             ###
             indtoplot = []
             ###
             dattoplot = []
+
             ###
             for index in dat_col_ind:
                 #    indtoplot.append(list(pd.to_datetime(dat[0]).values))
@@ -90,9 +102,9 @@ def plot_data():
                 dattoplot.append(list(dat[index].values))
             
             ###
-            print "indtoplot ", indtoplot
+            print "indtoplot ", indtoplot; sys.stdout.flush();
             ###
-            print "dattoplot ", dattoplot
+            print "dattoplot ", dattoplot; sys.stdout.flush();
             
             df = pd.DataFrame(req.json())
             ###
