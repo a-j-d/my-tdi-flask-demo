@@ -81,7 +81,7 @@ def plot_data():
             print "df ", df; sys.stdout.flush(); 
             
             ###
-            dat = df['dataset']['data']
+            dat = pd.DataFrame(req.json()['dataset']['data'])
             
             ###
             print 'dat' , dat; sys.stdout.flush();
