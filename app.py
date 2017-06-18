@@ -15,6 +15,7 @@ from bokeh.models.formatters import DatetimeTickFormatter
 app = Flask(__name__)
 
 app.vars={}
+base_colors=['navy',"#B3DE69","#CAB2D6","#F4A582"]
 
 @app.route('/')
 def main():
@@ -90,6 +91,8 @@ def plot_data():
             ###
             dat_col_ind = [df['dataset']['column_names'].index(elem) for elem in app.vars['checkboxes']]
             print 'dat_col_ind ', dat_col_ind ; sys.stdout.flush();
+            
+            colors = base_colors[0:len(dat_col_ind)]
 
             ###
             print "dat info", type(dat), dat; sys.stdout.flush();
@@ -145,8 +148,10 @@ def plot_data():
             #print "df2 index is: ", df2.index
             
             fig = figure(width=500, height=300)#, x_axis_type="datetime") 
+            for (xs, ys, color, leg) in zip(indtoplot, dattoplot, colors, app.vars['checkboxes']):
+                fig.line(xs, ys, color=color, legend=leg)
             ###
-            fig.multi_line(indtoplot, dattoplot)
+            #fig.multi_line(indtoplot, dattoplot, color=colors)
             #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
             #fig.line(df2.index,df2['Close'])#,color="#2222aa",line_width=5)
             ###
