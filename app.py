@@ -127,11 +127,13 @@ def plot_data():
             ###
             #print "df: ", df; sys.stdout.flush();
             
-            datdic = dict(req.json()['dataset']['data'])
+            ###
+            #datdic = dict(req.json()['dataset']['data'])
             ###
             #print "datdic: ", datdic; sys.stdout.flush();
             
-            ordatdic = collections.OrderedDict(sorted(datdic.items()))
+            ###
+            #ordatdic = collections.OrderedDict(sorted(datdic.items()))
             ###
             #print "ordatdic: ", ordatdic ; sys.stdout.flush();
             
